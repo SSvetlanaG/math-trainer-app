@@ -13,9 +13,12 @@ def main():
         choice = input("\nВыберите раздел: ")
         
         if choice == "1":
-            print("\n[В разработке: Модуль Нины]")
-        elif choice == "2":
-            print("\n[В разработке: Модуль Даниила]")
+    		score = arithmetic.start_trainer() # Вызов функции Нины
+    		stats.save_result("Игрок", score) # Сразу сохраняем результат
+	elif choice == "2":
+    		score = matrices.start_trainer() # Вызов функции Даниила
+    		stats.save_result("Игрок", score)
+
         elif choice == "3":
             stats.show_stats() # Вызов функции из модуля stats.py
         elif choice == "0":
