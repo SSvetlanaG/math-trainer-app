@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import random
 
 def start_trainer():
@@ -17,7 +16,7 @@ def start_trainer():
     except ValueError:
         print("Нужно вводить числа!")
         return 0
-=======
+
 import random
 
 def start_trainer():
