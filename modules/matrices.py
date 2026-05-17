@@ -1,83 +1,86 @@
 import random
 
 def start_trainer():
-    # Случайно выбираем операцию: 0 - сложение, 1 - вычитание, 2 - умножение на число
-    operation = random.randint(0, 2)
-    
-    # Генерация двух случайных матриц 2x2 (для умножения на число вторая не понадобится)
-    m1 = [[random.randint(1, 5) for _ in range(2)] for _ in range(2)]
-    m2 = [[random.randint(1, 5) for _ in range(2)] for _ in range(2)]
-    
-    # Для умножения на число генерируем случайное число от 2 до 5
-    scalar = random.randint(2, 5)
-    
-    # Показываем условие в зависимости от операции
     print("\n--- ТРЕНАЖЕР: МАТРИЦЫ ---")
-    print("Матрица A:")
-    print(f"{m1[0][0]} {m1[0][1]}")
-    print(f"{m1[1][0]} {m1[1][1]}")
+    print("Для выхода в меню ничего не вводите и просто нажмите Enter\n")
     
-    if operation == 0:  # Сложение
-        print("\nМатрица B:")
-        print(f"{m2[0][0]} {m2[0][1]}")
-        print(f"{m2[1][0]} {m2[1][1]}")
-        print(f"\nВычислите: A + B")
-        
-        # Правильный ответ
-        result = [
-            [m1[0][0] + m2[0][0], m1[0][1] + m2[0][1]],
-            [m1[1][0] + m2[1][0], m1[1][1] + m2[1][1]]
-        ]
-        
-    elif operation == 1:  # Вычитание
-        print("\nМатрица B:")
-        print(f"{m2[0][0]} {m2[0][1]}")
-        print(f"{m2[1][0]} {m2[1][1]}")
-        print(f"\nВычислите: A - B")
-        
-        # Правильный ответ
-        result = [
-            [m1[0][0] - m2[0][0], m1[0][1] - m2[0][1]],
-            [m1[1][0] - m2[1][0], m1[1][1] - m2[1][1]]
-        ]
-        
-    else:  # Умножение на число (operation == 2)
-        print(f"\nУмножьте матрицу A на число {scalar}")
-        
-        # Правильный ответ
-        result = [
-            [m1[0][0] * scalar, m1[0][1] * scalar],
-            [m1[1][0] * scalar, m1[1][1] * scalar]
-        ]
+    score = 0  # Счётчик правильных ответов
     
-    # Просим ввести ответ
-    print("\nВведите 4 числа (результат) через пробел:")
-    print("(Первая строка: два числа, пробел, вторая строка: два числа)")
-    
-    user_input = input("Ваш ответ: ")
-    parts = user_input.split()
-    
-    # Проверяем, что введено ровно 4 числа
-    if len(parts) != 4:
-        print("❌ Ошибка! Нужно ввести ровно 4 числа через пробел.")
-        return 0
-    
-    try:
-        user_numbers = [int(x) for x in parts]
+    while True:  # Бесконечный цикл — можно решать много примеров
+        # Случайный выбор операции: 0 - сложение, 1 - вычитание, 2 - умножение на число
+        operation = random.randint(0, 2)
         
-        # Сравниваем все 4 числа
-        if (user_numbers[0] == result[0][0] and
-            user_numbers[1] == result[0][1] and
-            user_numbers[2] == result[1][0] and
-            user_numbers[3] == result[1][1]):
-            print("✅ Отлично! Верно!")
-            return 1
-        else:
-            print("❌ Ошибка! Правильный ответ:")
-            print(f"{result[0][0]} {result[0][1]}")
-            print(f"{result[1][0]} {result[1][1]}")
-            return 0
+        # Генерация первой матрицы 2x2
+        m1 = [[random.randint(1, 5) for _ in range(2)] for _ in range(2)]
+        
+        # Вывод первой матрицы
+        print(f"\nМатрица A:")
+        print(f"{m1[0][0]} {m1[0][1]}")
+        print(f"{m1[1][0]} {m1[1][1]}")
+        
+        if operation == 0:  # Сложение
+            m2 = [[random.randint(1, 5) for _ in range(2)] for _ in range(2)]
+            print(f"\nМатрица B:")
+            print(f"{m2[0][0]} {m2[0][1]}")
+            print(f"{m2[1][0]} {m2[1][1]}")
+            print(f"\nВычислите: A + B")
             
-    except ValueError:
-        print("❌ Ошибка! Введите только числа, разделённые пробелами.")
-        return 0
+            result = [
+                [m1[0][0] + m2[0][0], m1[0][1] + m2[0][1]],
+                [m1[1][0] + m2[1][0], m1[1][1] + m2[1][1]]
+            ]
+            
+        elif operation == 1:  # Вычитание
+            m2 = [[random.randint(1, 5) for _ in range(2)] for _ in range(2)]
+            print(f"\nМатрица B:")
+            print(f"{m2[0][0]} {m2[0][1]}")
+            print(f"{m2[1][0]} {m2[1][1]}")
+            print(f"\nВычислите: A - B")
+            
+            result = [
+                [m1[0][0] - m2[0][0], m1[0][1] - m2[0][1]],
+                [m1[1][0] - m2[1][0], m1[1][1] - m2[1][1]]
+            ]
+            
+        else:  # Умножение на число
+            scalar = random.randint(2, 5)
+            print(f"\nУмножьте матрицу A на число {scalar}")
+            
+            result = [
+                [m1[0][0] * scalar, m1[0][1] * scalar],
+                [m1[1][0] * scalar, m1[1][1] * scalar]
+            ]
+        
+        print("\nВведите 4 числа (результат) через пробел:")
+        user_input = input("Ваш ответ: ").strip()
+        
+        # Выход, если пользователь ничего не ввёл
+        if user_input == "":
+            print(f"\nВыход из тренажёра. Всего набрано баллов: {score}")
+            return score
+        
+        parts = user_input.split()
+        
+        # Проверка, что введено 4 числа
+        if len(parts) != 4:
+            print("❌ Ошибка! Нужно ввести ровно 4 числа через пробел.")
+            continue
+        
+        try:
+            user_numbers = [int(x) for x in parts]
+            
+            # Сравнение всех 4 чисел
+            if (user_numbers[0] == result[0][0] and
+                user_numbers[1] == result[0][1] and
+                user_numbers[2] == result[1][0] and
+                user_numbers[3] == result[1][1]):
+                print("✅ Верно!")
+                score += 1  # Увеличиваем счётчик
+            else:
+                print("❌ Ошибка!")
+                print(f"Правильный ответ:")
+                print(f"{result[0][0]} {result[0][1]}")
+                print(f"{result[1][0]} {result[1][1]}")
+        except ValueError:
+            print("❌ Ошибка! Введите только числа, разделённые пробелами.")
+            print("Пример: 4 7 5 5")
